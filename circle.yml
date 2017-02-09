@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 7.4.0
+dependencies:
+  override:
+    - npm install -g npm@next
+    - npm install -g istanbul
+    - npm install
+general:
+  artifacts:
+    - ./coverage
