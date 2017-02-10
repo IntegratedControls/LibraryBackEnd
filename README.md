@@ -1,5 +1,5 @@
 # CST Library Back end
-[![CircleCI](https://circleci.com/gh/IntegratedControls/CSTLibraryBackEnd.svg?style=svg)](https://circleci.com/gh/IntegratedControls/CSTLibraryBackEnd)
+[![CircleCI](https://circleci.com/gh/IntegratedControls/LibraryBackEnd.svg?style=svg)](https://circleci.com/gh/IntegratedControls/LibraryBackEnd)
 
 #Install
 - npm install
