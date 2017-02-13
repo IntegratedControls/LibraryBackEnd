@@ -1,7 +1,7 @@
 {
   "name": "CSTLibrary-backend",
   "version": "0.1.0",
-  "description": "backend for CSTLibrary",
+  "description": "backend for CST Library",
   "main": "index.js",
   "engines": {
     "node": "7.5.0",
@@ -14,7 +14,8 @@
     "mocha": "mocha  -r ./test/bootstrap.js test/**/*.js",
     "nyc": "nyc npm run mocha",
     "test": "istanbul  cover  ./node_modules/.bin/_mocha  -r ./test/bootstrap.js test/**/*.js  --coverage --dir ./coverage",
-    "test:debug": "./node_modules/.bin/mocha --inspect --debug-brk -r ./test/bootstrap.js test/**/*.js"
+    "test:debug": "./node_modules/.bin/mocha --inspect --debug-brk -r ./test/bootstrap.js test/**/*.js",
+    "cleaninstall": "rm -rf node_modules && npm cache clean && npm install"
   },
   "repository": {
     "type": "git",
@@ -49,7 +50,6 @@
     "chai-as-promised": "^6.0.0",
     "chai-http": "^3.0.0",
     "chokidar-cli": "^1.2.0",
-    "dotenv": "^2.0.0",
     "eslint": "^3.2.2",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-import": "^1.12.0",
