@@ -5,13 +5,11 @@ const helmet     = require('helmet');
 const bodyParser = require('body-parser');
 const morgan     = require('morgan');
 const bluebird   = require('bluebird');
-const dotenv     = require('dotenv');
 const config = require('./config');
 const routes = require('./routes');
 const cors = require('cors');
 
 // TODO: Figure out why process.env.NODE_ENV is undefined at start
-dotenv.config();
 const corsOptions =
 { origin: process.env.AllowUrl,
   credentials: true,

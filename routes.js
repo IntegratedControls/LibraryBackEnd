@@ -18,7 +18,7 @@ function authenticate(req, res, next) {
 }
 
 router.route('/').get((req, res) => {
-  res.json({ message: 'Welcome to Our Hands and Feet API!' });
+  res.json({ message: 'Welcome to CST Library API!' });
 });
 router.all('/*', authenticate, (req, res, next) => {
   next();
