@@ -14,6 +14,7 @@ const bookSchema = new Schema({
   isbn: { type: String, required: false },
   siteLocation: { type: String, required: false },
   numberOfCopies: { type: Number, required: false },
+  access: { type: String, required: false },
   comments: { type: String, required: false }
 });
 
