@@ -10,7 +10,7 @@ const bookSchema = new Schema({
   dateOfPub: { type: Number, required: false },
   url: { type: String, required: false },
   // isCheckedOut: { type: Number, required: false },
-// isbn is either the GE number or the orderable number from a bookstore
+  // isbn is either the GE number or the orderable number from a bookstore
   isbn: { type: String, required: false },
   siteLocation: { type: String, required: false },
   numberOfCopies: { type: Number, required: false },
