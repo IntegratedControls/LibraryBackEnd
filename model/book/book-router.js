@@ -17,7 +17,7 @@ router.route('/getall')
 router.route('/')
 .post((...args) => controller.create(...args));
 
-router.route('/:id')
+router.route('/update/:id')
 .put((...args) => controller.update(...args));
 
 module.exports = router;
