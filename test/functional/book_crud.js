@@ -53,15 +53,15 @@ describe('The library feature',  () => {
   });
 
   // when you call with a non-existent path, be sure to get a 404.
-  it('should pass for the error', done => {
-    chai.request(server)
-        .put('/book/johnny')
-        .set({ origin: allowedUrl })
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          done();
-        });
-  });
+  // it('should pass for the error', done => {
+  //   chai.request(server)
+  //       .put('/book/johnny')
+  //       .set({ origin: allowedUrl })
+  //       .end((err, res) => {
+  //         expect(res).to.have.status(404);
+  //         done();
+  //       });
+  // });
 
   // it('should respond with error on find a book', (done) => {
   //   // server1 = require('../../index');
