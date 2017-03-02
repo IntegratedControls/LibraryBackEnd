@@ -25,7 +25,8 @@ const bookSchema = new Schema({
   numberOfCopies: { type: Number, required: false },
   access: { type: String, required: false },
   comments: { type: String, required: false },
-  checkedOutBy: { type: String, required: false }
+  checkedOutBy: { type: String, required: false },
+  checkedOutByName: { type: String, required: false }
 });
 
 // bookSchema.methods = {
