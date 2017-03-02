@@ -28,7 +28,7 @@ exports.authenticate = function (req, res) {
     // Step 2. Retrieve profile information about the current user.
     request.get({ url: peopleApiUrl, headers: headers, json: true }, function(err, response, profile) {
       //console.log("Got Profile Info");
-          // // Step 3a. Link user accounts.
+      // // Step 3a. Link user accounts.
       // if (req.headers.authorization) {
       //   User.findOne({ google: profile.sub }, function(err, existingUser) {
       //     if (existingUser) {
@@ -51,24 +51,25 @@ exports.authenticate = function (req, res) {
       //     });
       //   });
       //} else {
-        // Step 3b. Create a new user account or return an existing one.
-        User.findOne({ email: profile.email }, function(err, existingUser) {
-          //console.log(existingUser);
-          if (existingUser) {
-              console.log("user exist");
+      // Step 3b. Create a new user account or return an existing one.
+      User.findOne({ email: profile.email }, function(err, existingUser) {
+        //console.log(existingUser);
+        if (existingUser) {
+          console.log("user exist");
 
-            return res.send({ token: authUtils.createJWT(existingUser) });
-          }else{
-            var user = new User();
-            user.name = profile.name;
-            user.email = profile.email;
-            user.save(function(err) {
-              const token = authUtils.createJWT(user);
-              console.log('token sent');
-              res.send({ token: token });
-            });
-          }
-        });
+          return res.send({ token: authUtils.createJWT(existingUser) });
+        }else{
+          var user = new User();
+          user.name = profile.name;
+          user.email = profile.email;
+          user.userType = '';
+          user.save(function(err) {
+            const token = authUtils.createJWT(user);
+            console.log('token sent');
+            res.send({ token: token });
+          });
+        }
+      });
     });
   });
 };
