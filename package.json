@@ -4,7 +4,7 @@
   "description": "backend for CST Library",
   "main": "index.js",
   "engines": {
-    "node": "7.6.0",
+    "node": "7.7.1",
     "npm": "4.1.2"
   },
   "scripts": {
