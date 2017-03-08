@@ -1,8 +1,5 @@
 const User1 = require('../../model/user/user-schema');
-// const Server1 = require('../../index');
 let allowedUrl = '';
-
-// const Controller = require('../../lib/controller');
 
 mockgoose(mongoose).then(() => {
   global.server = require('../../index');
@@ -28,7 +25,6 @@ it('should create a new user', (done) => {
     done();
   });
 });
-
 
 it('should not update a user when using a ID that does not exist', (done) => {
   // const User = new User1();
