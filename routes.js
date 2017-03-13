@@ -2,12 +2,13 @@ const Router = require('express').Router;
 const router = new Router();
 const user  = require('./model/user/user-router');
 const book = require('./model/book/book-router');
+const allowedUrls = JSON.parse(process.env.AllowUrl).urls;
 // const authIsOn = true;
 
 function authenticate(req, res, next) {
   // if (authIsOn) {
   // return next();
-  if (req.headers.origin === process.env.AllowUrl) {
+  if (allowedUrls.indexOf(req.headers.origin) !== -1) {
     next();
   } else {
     res.redirect('/');
