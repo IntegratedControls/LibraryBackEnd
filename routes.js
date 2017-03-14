@@ -6,16 +6,15 @@ const allowedUrls = JSON.parse(process.env.AllowUrl).urls;
 // const authIsOn = true;
 
 function authenticate(req, res, next) {
-  // if (authIsOn) {
-  // return next();
+  
   if (allowedUrls.indexOf(req.headers.origin) !== -1) {
+    next();
+  } else if (process.env.CORSisON === 'false') {
     next();
   } else {
     res.redirect('/');
   }
-  // } else {
-    // next();
-  // }
+  
 }
 
 router.route('/').get((req, res) => {
