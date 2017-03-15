@@ -7,7 +7,6 @@ dependencies:
     - npm install -g istanbul
     - npm install -g yarn
     - yarn install
-    - npm install --only=dev
 general:
   artifacts:
     - ./coverage
