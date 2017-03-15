@@ -7,14 +7,14 @@ const peopleApiUrl = google.__get__('peopleApiUrl')
 
 describe('The Unit Test for Google Module', () => {
   let
-    User,
-    request,
-    authUtils;
+  User,
+  request,
+  authUtils;
 
   let
-    revert_User,
-    revert_request,
-    revert_authUtils;
+  revert_User,
+  revert_request,
+  revert_authUtils;
 
   beforeEach(() => {
     User = sinon.stub();
