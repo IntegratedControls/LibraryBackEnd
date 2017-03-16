@@ -4,7 +4,8 @@ const authUtils = rewire('../../auth/authUtils');
 const moment = require('moment');
 
 describe('The Unit Test for authUtils Module', () => {
-  let jwt, revert_jwt;
+  let jwt;
+  let revert_jwt;
 
   beforeEach(() => {
     jwt = { encode: sinon.stub(), decode: sinon.stub() };
@@ -19,7 +20,7 @@ describe('The Unit Test for authUtils Module', () => {
     it('should create token', () => {
       const token = 'sometoken';
       const user = { _id: 'someid' };
-      jwt.encode.returns(token)
+      jwt.encode.returns(token);
 
       expect(authUtils.createJWT(user)).to.not.be.null;
       expect(jwt.encode.args[0][0].sub).to.equal(user._id);
@@ -32,7 +33,7 @@ describe('The Unit Test for authUtils Module', () => {
       const send = sinon.spy();
       const res = { send };
       authUtils.handleError(res, err);
-      expect(send.args[0]).to.deep.equal([400, err])
+      expect(send.args[0]).to.deep.equal([400, err]);
     });
   });
 

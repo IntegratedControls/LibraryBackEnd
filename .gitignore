@@ -20,6 +20,7 @@ coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
+.idea/
 
 # node-waf configuration
 .lock-wscript
@@ -45,4 +46,6 @@ jspm_packages
 
 # Environment file
 .env
-yarn.lock
+
+# frontend
+frontend
