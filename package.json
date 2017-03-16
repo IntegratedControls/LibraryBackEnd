@@ -4,7 +4,7 @@
   "description": "backend for CST Library",
   "main": "index.js",
   "engines": {
-    "node": "7.7.2",
+    "node": "7.7.3",
     "npm": "4.1.2"
   },
   "scripts": {
@@ -13,7 +13,7 @@
     "build:dev": "(cd frontend || exit; npm run build:dev)",
     "build:prod": "(cd frontend || exit; npm run build:prod)",
     "start": "node index.js",
-    "cleaninstall": "rm -rf node_modules && npm install -g yarn@0.16.1 && yarn cache clean && yarn install",
+    "cleaninstall": "rm -rf node_modules && rm -rf yarn.lock && npm install -g yarn && yarn cache clean && yarn install",
     "debug": "node --inspect --debug-brk index.js",
     "mocha": "mocha  -r ./test/bootstrap.js test/**/*.js",
     "nyc": "nyc npm run mocha",
