@@ -4,8 +4,6 @@ let allowedUrl = '';
 
 // const Controller = require('../../lib/controller');
 
-const authUtils = require('../../auth/authUtils');
-
 mockgoose(mongoose).then(() => {
   global.server = require('../../index');
   allowedUrl = JSON.parse(process.env.AllowUrl).urls[0];
@@ -25,7 +23,7 @@ describe('functional test Create User',  () => {
   it('should create a new user', (done) => {
     const User = new User1();
     User.name = 'foo';
-    User.email = 'foo@example.com';
+    User.email = 'foo@bar.com';
     User.save((err) => {
       const id = User._id;
       expect(id).to.not.be.null;
@@ -40,7 +38,6 @@ describe('functional test Create User',  () => {
     chai.request(server)
     .put('/user/' + Uid)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send({ userType: 'coolGuy' })
     .end((err, res) => {
       // expect(res).to.have.status(500);
@@ -53,12 +50,11 @@ describe('functional test Create User',  () => {
   it('should modify a user', (done) => {
     const User = new User1();
     User.name = 'foo';
-    User.email = 'foo2@example.com';
+    User.email = 'foo2@bar.com';
     User.save();
     chai.request(server)
     .put('/user/' + User.id)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send({ name: 'foobar' })
     .end((err, res) => {
       expect(res).to.have.status(200);
@@ -71,12 +67,11 @@ describe('functional test Create User',  () => {
   it('should find a user by id', (done) => {
     const User = new User1();
     User.name = 'foo';
-    User.email = 'foo3@example.com';
+    User.email = 'foo3@bar.com';
     User.save();
     chai.request(server)
     .get('/user/' + User._id)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .end((err, res) => {
       expect(res).to.have.status(200);
       done();
@@ -89,7 +84,6 @@ describe('functional test Create User',  () => {
     chai.request(server)
     .get('/user/' + id)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .end((err, res) => {
       expect(res).to.have.status(404);
       done();
@@ -102,7 +96,6 @@ describe('functional test Create User',  () => {
     chai.request(server)
     .put('/user/' + Uid)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send({ alien: 'yes' })
     .end((err, res) => {
       expect(err).to.be.an('error');
@@ -115,7 +108,6 @@ describe('functional test Create User',  () => {
     chai.request(server)
     .put('/user/' + Uid)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send({ alien: 'yes' })
     .end((err, res) => {
       expect(err).to.be.an('error');
@@ -129,7 +121,6 @@ describe('functional test Create User',  () => {
     chai.request(server)
     .get('/user/' + id)
     .set({ origin: allowedUrl })
-    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .end((err, res) => {
       expect(err).to.be.an('error');
       done();
