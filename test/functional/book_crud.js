@@ -5,6 +5,7 @@ const Book1 = require('../../model/book/book-schema');
 let allowedUrl = '';
 
 const  mock = mockgoose(mongoose);
+const authUtils = require('../../auth/authUtils');
 
 mock.then(() => {
   global.server = require('../../index');
@@ -37,6 +38,7 @@ describe('The library feature',  () => {
     chai.request(server)
     .post('/book/')
     .set({ origin: allowedUrl })
+    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send({ title: 'foobar', type: 'book' })
     .end((err, res) => {
       expect(res).to.have.status(201);
@@ -44,12 +46,14 @@ describe('The library feature',  () => {
     });
   });
 
-  it('should find a book', (done) => {
+  it('should return all books or raise error if no books', (done) => {
     chai.request(server)
     .get('/book/getall')
     .set({ origin: allowedUrl })
+    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .end((err, res) => {
-      expect(res).to.have.status(200);
+      expect(res).to.have.status(500);
+      console.log(typeof res);
       done();
     });
   });
@@ -58,6 +62,7 @@ describe('The library feature',  () => {
     chai.request(server)
     .post('/book/')
     .set({ origin: allowedUrl })
+    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send([{ title: 'foobar', type: 'book' }, { title: 'JFK', type: 'PDF' }])
     .end((err, res) => {
       expect(res).to.have.status(201);
@@ -70,6 +75,7 @@ describe('The library feature',  () => {
     chai.request(server)
     .put('/book/johnny')
     .set({ origin: allowedUrl })
+    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .end((err, res) => {
       expect(res).to.have.status(404);
       done();
@@ -81,6 +87,7 @@ describe('The library feature',  () => {
     chai.request(server)
     .get('/book/find/one')
     .set({ origin: allowedUrl })
+    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .end((err, res) => {
       console.log(res.status);
       // expect(res).to.have.status(200);
@@ -97,6 +104,7 @@ describe('The library feature',  () => {
     chai.request(server)
     .put('/book/update/' + Book.id)
     .set({ origin: allowedUrl })
+    .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
     .send({ checkedOutBy: '' })
     .end((err, res) => {
       expect(res).to.have.status(200);
