@@ -1,34 +1,34 @@
-const express = require('express'),
-    path = require("path"),
-    bookrouter = path.resolve("routes.js");
-
-
-describe('GET /ping', function () {
-  var app, getBookStub, request, route, controller;
-
-  beforeEach(function () {
-    getBookStub = sinon.stub();
-    controller = sinon.stub();
-    app = express();
-    route = proxyquire(bookrouter, {
-      '../../model/book/book-schema.js': {
-        getall: getBookStub
-      }
-    });
-
-    route(app);
-    request = supertest(app);
-  });
-
-  it('should respond with 200 and a book object', function(done) {
-
-    request
-    .get('/')
-    .expect('Content-Type', /json/)
-    .expect(200, function(err, res) {
-      expect(res).to.have.status(200);
-      console.log(res.body);
-      done();
-    });
-  });
-});
+// //TODO fake server with Sinon
+// Server2 = require('../../index');
+// const  ServerMock = sinon.createFakeServer();
+//
+// mock.then(() => {
+//   process.env.CORSisON = true;
+//
+//
+//   done();
+// });
+//
+// mock.catch(err => {
+//   // "use strict";
+//   console.log(err);
+// });
+//
+//
+// describe('the route redirect', () => {
+//   beforeEach((done) => {
+//
+//     done();
+//   });
+//
+//   it('should redirect to / if CORS is true and allowURL is incorrect', (done) => {
+//     chai.request(FAKEserver)
+//     .get('/book/getall')
+//     .set({ origin: 'http://bogus.com' })
+//     .end((err, res) => {
+//
+//       expect(res).to.have.status(200);
+//       done();
+//     });
+//   });
+// });
