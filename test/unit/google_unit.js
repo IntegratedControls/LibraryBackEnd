@@ -1,37 +1,34 @@
-let sinon = require('sinon');
-let rewire = require('rewire');
+// let sinon = require('sinon');
+const rewire = require('rewire');
 const google = rewire('../../auth/google');
 
-const accessTokenUrl = google.__get__('accessTokenUrl')
-const peopleApiUrl = google.__get__('peopleApiUrl')
+const accessTokenUrl = google.__get__('accessTokenUrl');
+const peopleApiUrl = google.__get__('peopleApiUrl');
 
 describe('The Unit Test for Google Module', () => {
-  let
-  User,
-  request,
-  authUtils;
-
-  let
-  revert_User,
-  revert_request,
-  revert_authUtils;
+  let User;
+  let request;
+  let authUtils;
+  let revertUser;
+  let revertRequest;
+  let revertAuthUtils;
 
   beforeEach(() => {
     User = sinon.stub();
     User.findOne = sinon.stub();
-    revert_User = google.__set__('User', User);
+    revertUser = google.__set__('User', User);
 
     request = { get: sinon.stub(), post: sinon.stub() };
-    revert_request = google.__set__('request', request);
+    revertRequest = google.__set__('request', request);
 
     authUtils = { createJWT: sinon.stub() };
-    revert_authUtils = google.__set__('authUtils', authUtils);
+    revertAuthUtils = google.__set__('authUtils', authUtils);
   });
 
   afterEach(() => {
-    revert_User();
-    revert_request();
-    revert_authUtils();
+    revertUser();
+    revertRequest();
+    revertAuthUtils();
   });
 
   it('should authenticate', (done) => {
@@ -48,10 +45,8 @@ describe('The Unit Test for Google Module', () => {
 
     const lastToken = 'lastToken';
     authUtils.createJWT.returns(lastToken);
-
-
-    var req = { body: {} };
-    var res = {
+    const req = { body: {} };
+    const res = {
       send: (msg) => {
         expect(msg).to.have.property('token');
         expect(msg.token).to.equal(lastToken);
@@ -59,7 +54,7 @@ describe('The Unit Test for Google Module', () => {
       }
     };
 
-    google.authenticate(req, res)
+    google.authenticate(req, res);
   });
 
   it('should create a new user and authenticate', (done) => {
@@ -73,16 +68,15 @@ describe('The Unit Test for Google Module', () => {
 
     // const existingUser = { _id: 'someid' };
     User.findOne.yields(null, null);
-    var newUser = { save: sinon.stub() };
+    const newUser = { save: sinon.stub() };
     User.returns(newUser);
     newUser.save.yields(null);
 
     const lastToken = 'lastToken';
     authUtils.createJWT.returns(lastToken);
 
-
-    var req = { body: {} };
-    var res = {
+    const req = { body: {} };
+    const res = {
       send: (msg) => {
         expect(msg).to.have.property('token');
         expect(msg.token).to.equal(lastToken);
@@ -90,6 +84,6 @@ describe('The Unit Test for Google Module', () => {
       }
     };
 
-    google.authenticate(req, res)
+    google.authenticate(req, res);
   });
 });

@@ -1,15 +1,15 @@
 const User2 = require('../../model/user/user-schema');
-mockgoose(mongoose).then(() => {
-  global.server = require('../../index');
-  done();
-});
 const authUtils = require('../../auth/authUtils');
 
 describe('functional test Create User', () => {
   beforeEach((done) => {
     User2.collection.drop();
     User2.ensureIndexes();
-    done();
+    mockgoose(mongoose).then(() => {
+      global.server = require('../../index');
+      global.allowedUrl = JSON.parse(process.env.AllowUrl).urls[0];
+      done();
+    });
   });
 
   it('should get the new user by id', (done) => {
@@ -37,7 +37,7 @@ describe('functional test Create User', () => {
       chai.request(server)
       .put('/user/' + Uid)
       .set('authorization', 'Bearer ' + authUtils.createJWT('foo2@example.com'))
-      .send({ userType: 'coolGuy' })
+      .send({ userType: 'Reader' })
       .end((err, res) => {
         expect(res).to.have.status(200);
         done();
