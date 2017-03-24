@@ -1,25 +1,15 @@
 const User1 = require('../../model/user/user-schema');
-// const Server1 = require('../../index');
-let allowedUrl = '';
-
-// const Controller = require('../../lib/controller');
-
 const authUtils = require('../../auth/authUtils');
-
-mockgoose(mongoose).then(() => {
-  global.server = require('../../index');
-  allowedUrl = JSON.parse(process.env.AllowUrl).urls[0];
-  done();
-}, err => {
-  // "use strict";
-  console.log('[-]ERROR', err);
-});
 
 describe('functional test Create User',  () => {
   beforeEach((done) => {
     User1.collection.drop();
     User1.ensureIndexes();
-    done();
+    mockgoose(mongoose).then(() => {
+      global.server = require('../../index');
+      global.allowedUrl = JSON.parse(process.env.AllowUrl).urls[0];
+      done();
+    });
   });
 
   it('should create a new user', (done) => {
@@ -47,7 +37,6 @@ describe('functional test Create User',  () => {
       expect(res).to.have.status(404);
       done();
     });
-    // done();
   });
 
   it('should modify a user', (done) => {
