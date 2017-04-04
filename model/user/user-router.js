@@ -7,6 +7,11 @@ router.route('/:id')
 .get((...args) => controller.findById(...args));
 //   .delete((...args) => controller.remove(...args));
 
+router.route('/getall')
+.get((...args) => controller.find(...args));
+
+// router.route('/create')
+// .post((...args) => controller.create(...args));
 // router.route('/getall')
 // .get((...args) => controller.find(...args));
 
